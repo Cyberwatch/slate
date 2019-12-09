@@ -8,6 +8,10 @@ class UniqueHeadCounter < Middleman::Renderers::MiddlemanRedcarpetHTML
   end
   def header(text, header_level)
     friendly_text = text.gsub(/<[^>]*>/,"").parameterize
+
+    # remove translation tags from anchors
+    friendly_text = friendly_text.gsub(/t-39-(.*)-39/,'\1')
+
     if friendly_text.strip.length == 0
       # Looks like parameterize removed the whole thing! It removes many unicode
       # characters like Chinese and Russian. To get a unique URL, let's just
