@@ -7,10 +7,10 @@ class UniqueHeadCounter < Middleman::Renderers::MiddlemanRedcarpetHTML
     @head_count = {}
   end
   def header(text, header_level)
-    friendly_text = text.gsub(/<[^>]*>/,"").parameterize
+    # use translated titles as anchors
+    friendly_text = eval('I18n.' + text.gsub('&#39;', '\'')).downcase.split.join('_')
 
-    # remove translation tags from anchors
-    friendly_text = friendly_text.gsub(/t-39-(.*)-39/,'\1')
+    friendly_text = friendly_text.gsub(/<[^>]*>/,"").parameterize
 
     if friendly_text.strip.length == 0
       # Looks like parameterize removed the whole thing! It removes many unicode
