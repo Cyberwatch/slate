@@ -58,4 +58,4 @@ helpers do
   require './lib/toc_data.rb'
 end
 
-activate :i18n, langs: [:en, :fr]
+activate :i18n, mount_at_root: false, langs: [:en, :fr]
